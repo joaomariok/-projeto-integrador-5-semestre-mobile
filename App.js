@@ -6,12 +6,13 @@ import api from './api'
 
 const chartConfig = {
   backgroundColor: '#121214',
+  backgroundGradientTo: '#121214',
+  backgroundGradientToOpacity: 1,
+  backgroundGradientFrom: '#121214',
+  backgroundGradientFromOpacity: 1,
   decimalPlaces: 0, // optional, defaults to 2dp
   color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
   barPercentage: 1,
-  style: {
-    borderRadius: 16
-  }
 }
 
 const LIST_OF_LABELS = ["Baixa", "Média", "Alta"];
@@ -105,6 +106,13 @@ export default function App() {
       datasets: [
         {
           data: permanencias,
+          colors: [
+            (opacity = 1) => '#FFCD1E',
+            (opacity = 1) => '#FFCD1E',
+            (opacity = 1) => '#FFCD1E',
+            (opacity = 1) => '#FFCD1E',
+            (opacity = 1) => '#FFCD1E',
+          ],
         },
       ],
     });
@@ -138,6 +146,11 @@ export default function App() {
       datasets: [
         {
           data: averageHours,
+          colors: [
+            (opacity = 1) => '#FFCD1E',
+            (opacity = 1) => '#FFCD1E',
+            (opacity = 1) => '#FFCD1E',
+          ],
         },
       ],
     });
@@ -200,6 +213,7 @@ export default function App() {
         height={220}
         fromZero={true}
         showValuesOnTopOfBars={true}
+        withCustomBarColorFromData={true}
         chartConfig={chartConfig}
       />}
       {dataGravidade && <Text style={styles.subtitle}>Permanência média por Gravidade</Text>}
@@ -208,6 +222,7 @@ export default function App() {
         width={Dimensions.get('window').width - 16}
         height={220}
         fromZero={true}
+        withCustomBarColorFromData={true}
         chartConfig={chartConfig}
       />}
       <Pressable style={styles.button} onPress={fetchAll}>
